@@ -1,0 +1,30 @@
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 2em;
+    background-color: #f6f6f6;
+    box-shadow: 1px 1px 2px #CCCCCC;
+}
+
+.chart-container {
+    position: relative;
+}
+
+.last-price-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1, .last-price {
+    color: #336699;
+}
+
+h4 {
+    color: #777777;
+    margin: 0;
+    font-size: 0.6em;
+}

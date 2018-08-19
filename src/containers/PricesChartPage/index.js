@@ -2,11 +2,14 @@ import React from 'react';
 import {fetchBtcGbp} from "../../actions/btcgbp";
 import {connect} from "react-redux";
 import Chart from '../../components/Chart';
+import "./styles.css";
+import TrendArrow from '../../components/TrendArrow/index';
+import LoadingOverlay from '../../components/LoadingOverlay/index';
 
 export class PricesChartPage extends React.Component {
 
     componentDidMount () {
-        const fetchPricesInterval = 3000;
+        const fetchPricesInterval = 30000;
         this.props.dispatch(fetchBtcGbp());
 
         setInterval(() => {
@@ -16,48 +19,54 @@ export class PricesChartPage extends React.Component {
 
     render () {
         const { timePrices, loading, error } = this.props;
+        const times = timePrices.map(tp => tp.time);
+        const prices = timePrices.map(tp => tp.price);
+        const lastTwoPrices = prices && prices.length > 1 && prices.slice(-2);
+
+        console.log('last 2 prices', lastTwoPrices);
 
         const lineChartData = {
-            labels: [...timePrices.map(tp => tp.time)],
+            labels: [...times],
             datasets: [
                 {
                     type: "line",
-                    label: "BTC-GBP",
+                    label: "BTC - GBP",
                     backgroundColor: "transparent",
                     borderColor: "#336699",
-                    pointBackgroundColor: "#CC0000",
+                    pointBackgroundColor: "#F0F0F0",
                     pointBorderColor: "#336699",
                     borderWidth: "3",
                     lineTension: 0.5,
-                    data: [...timePrices.map(tp => tp.price)]
+                    data: [...prices]
                 }
             ]
         };
 
         const lineChartOptions = {
             responsive: true,
-                maintainAspectRatio: false,
-                tooltips: {
+            maintainAspectRatio: false,
+            tooltips: {
                 enabled: true
-            },
-            scales: {
-                xAxes: [
-                    {
-                        ticks: {
-                            autoSkip: true,
-                            maxTicksLimit: 10
-                        }
-                    }
-                ]
             }
         };
 
+        const lastPriceHeading = prices.length ? <h4>Last Price: <span className='last-price'>£{prices.slice(-1)}</span></h4> : '';
+
         return (
             <section>
+                <header>
+                    <h1>BTC to GBP</h1>
+                    <div className="last-price-container">
+                        {lastPriceHeading}
+                        <TrendArrow from={lastTwoPrices[0]} to={lastTwoPrices[1]}/>
+                    </div>
+                </header>
                 <div className="chart-container">
+                    <div className='loading-overlay-container'>
+                        {loading ? <LoadingOverlay/> : ''}
+                    </div>
                     <Chart data={lineChartData} options={lineChartOptions}/>
                 </div>
-                {loading ? <div>Loading new price...</div> : ''}
                 {error && !loading ? <div>Error fetching new BTC/GBP price. {error.message}</div> : ''}
             </section>
         );

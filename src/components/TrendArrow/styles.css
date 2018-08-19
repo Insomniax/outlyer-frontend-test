@@ -1,0 +1,12 @@
+.trend-arrow {
+    font-size: 1.2em;
+    margin-top: 15px;
+}
+
+.trend-arrow.up {
+    color: green;
+}
+
+.trend-arrow.down {
+    color: red;
+}
