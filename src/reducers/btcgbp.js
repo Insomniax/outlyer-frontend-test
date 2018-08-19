@@ -1,17 +1,24 @@
 import {BTC_GBP_FETCH_BEGIN, BTC_GBP_FETCH_SUCCESS, BTC_GBP_FETCH_ERROR} from "../actions/btcgbp";
-import Immutable from "immutable";
 
-const setLoading = (state, action) => state.set('loading', true);
-const parseErrorResponse = (state, action) => state.merge({
-    loading: false,
-    error: Immutable.fromJS(action.payload.error)
-});
+const setLoading = (state, action) => {
+    const newState = {...state};
+    newState.loading = true;
+    return newState;
+};
+const parseErrorResponse = (state, action) => {
+    const newState = {...state};
+    newState.loading = false;
+    newState.error = action.payload.error;
+
+    debugger;
+    return newState;
+};
 const parseSuccessResponse = (state, action) => {
-    return state.merge({
-        loading: false,
-        error: undefined,
-        prices: [...state.get('prices'), action.payload.prices]
-    });
+    const newState = {...state};
+    newState.loading = false;
+    newState.error = undefined;
+    newState.timePrices.push({time: new Date().toLocaleTimeString(), price: action.payload.lastPrice});
+    return newState;
 };
 
 const ACTION_HANDLERS = {
@@ -21,11 +28,11 @@ const ACTION_HANDLERS = {
 };
 
 // Reducer
-const initialState = Immutable.fromJS({
-    prices: [],
+const initialState = {
+    timePrices: [],
     loading: false,
     error: undefined
-});
+};
 export default function btcgbpReducer (state = initialState, action) {
     const handler = ACTION_HANDLERS[action.type];
     return handler ? handler(state, action) : state;
