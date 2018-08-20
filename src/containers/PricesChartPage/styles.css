@@ -7,6 +7,16 @@ header {
     box-shadow: 1px 1px 2px #CCCCCC;
 }
 
+@media screen and (max-width: 600px) {
+    header {
+        flex-direction: column;
+    }
+
+    .last-price-container {
+        margin-bottom: 0.87em;
+    }
+}
+
 .chart-container {
     position: relative;
 }
