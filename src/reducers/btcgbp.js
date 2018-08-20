@@ -9,8 +9,6 @@ const parseErrorResponse = (state, action) => {
     const newState = {...state};
     newState.loading = false;
     newState.error = action.payload.error;
-
-    debugger;
     return newState;
 };
 const parseSuccessResponse = (state, action) => {

@@ -23,8 +23,6 @@ export class PricesChartPage extends React.Component {
         const prices = timePrices.map(tp => tp.price);
         const lastTwoPrices = prices && prices.length > 1 && prices.slice(-2);
 
-        console.log('last 2 prices', lastTwoPrices);
-
         const lineChartData = {
             labels: [...times],
             datasets: [
@@ -67,14 +65,13 @@ export class PricesChartPage extends React.Component {
                     </div>
                     <Chart data={lineChartData} options={lineChartOptions}/>
                 </div>
-                {error && !loading ? <div>Error fetching new BTC/GBP price. {error.message}</div> : ''}
+                {error && !loading ? <div className="error-message">Error fetching new BTC/GBP price. {error.message}</div> : ''}
             </section>
         );
     }
 }
 
 const mapStateToProps = state => {
-    console.log('state', state);
     return ({
         timePrices: state.timePrices,
         loading: state.loading,

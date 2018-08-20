@@ -7,7 +7,7 @@ class LoadingOverlay extends Component {
         return (
             <div className="overlay">
                 <div className='indicator'>
-                    <LoadingIndicator/>
+                    <LoadingIndicator srLoadingText='Loading...'/>
                 </div>
             </div>
         )

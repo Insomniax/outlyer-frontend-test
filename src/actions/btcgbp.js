@@ -13,11 +13,9 @@ export function fetchBtcGbp () {
         dispatch(fetchBtcGbpBegin());
         return btcGbpApi.fetchBtcGbp()
             .then(json => {
-                console.log('json', json);
                 dispatch(fetchBtcGbpSuccess(json['last_price']));
                 return json['last_price'];
             }).catch(error => {
-                debugger;
                 dispatch(fetchBtcGbpError(error))
                 return error;
             })

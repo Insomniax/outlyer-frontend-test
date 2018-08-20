@@ -1,11 +1,17 @@
-// import LoadingIndicator from '../index';
+import React from 'react';
+import "../../../../setup/tests/setupEnzyme";
+import { shallow } from 'enzyme';
+import LoadingIndicator from '../';
 
- // import expect from 'expect';
-// import { shallow } from 'enzyme';
-// import React from 'react';
+const wrapper = shallow(<LoadingIndicator srLoadingText='Loading...'/>);
 
-describe('<LoadingIndicator />', () => {
-  // it('Expect to have unit tests specified', () => {
-  //   expect(true).toEqual(false);
-  // });
+describe('<LoadingIndicator/>', () => {
+    it('should render', () => {
+        expect(wrapper).toBeTruthy();
+    });
+
+    it('should display spinner with loading text for screen readers', () => {
+        expect(wrapper.find('.fa-spinner.fa-pulse')).toBeTruthy();
+        expect(wrapper.find('span.sr-only').text()).toEqual('Loading...')
+    });
 });
