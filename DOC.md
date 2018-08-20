@@ -13,17 +13,16 @@
 ### Approximately 20 hours were spent for the test.
 
 ## Q) If you had more time, what further improvements or new features would you add?
-### I had enough time, despite that I would improve it using SASS to improve styling, saga middleware
-for more declarative side effects in the reducer. I would add currency options for the user to select
-and check the bitcoin conversion.
+### I had enough time, despite that I would improve it using SASS to improve styling, saga middleware for more declarative side effects in the reducer.
+### I would add currency options for the user to select and check the bitcoin conversion.
 
 ## Q) Which parts are you most proud of? And why?
 ### I am proud of the organization, the chart itself since I find it difficult to implement.
 ### There is a not so well-explained documentation so it took me some time to figure it out.
 
 ## Q) Which parts did you spend the most time with? What did you find most difficult?
-### I specnt most time with the chart, as I state above there is poor (per me) documentation.
-### Also the unit test took quite a lot of time since I am not familiar with them in React.
+### I spent most time with the chart, as I state above there is poor documentation.
+### Also the unit test took quite a lot of time since I am not familiar with it in React.
 
 ## Q) How did you find the test overall? If you have any suggestions on how we can improve the test, we'd love to hear them.
 ### The test was very interesting as it combined a lot of challenges: chart, proxy-server, redux, unit testing.
